@@ -1,12 +1,12 @@
 
 #include <iostream>
-#include "robot.hpp"
-
-using namespace RPR;
-extern Robot* robot;
+#include "RPi-Robot.hpp"
 
 int main(int argc, char** argv) {
   std::cout << "Starting Program" << std::endl;
-  robot->execute();
+  while(robot->is_running()){
+    robot->execute();
+  }
+  delete robot;
   std::cout << "Ending Program" << std::endl;
 }
