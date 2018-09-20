@@ -6,7 +6,7 @@ INCLUDE_PATH=./include
 SOURCES=$(shell find $(SRC_PATH) -type f -name '*.cpp' )
 
 CC=g++
-CFLAGS=-g -std=c++17 \
+CFLAGS=-g -std=c++98 \
 	-Wall \
 	-Wfloat-equal \
 	-Wundef \
@@ -16,16 +16,19 @@ CFLAGS=-g -std=c++17 \
 	-Wcast-align \
 	-Wunreachable-code \
 	-I$(INCLUDE_PATH)
-LDFLAGS=
+#TODO: make LDFLAGS used in programs makefiles
+LDFLAGS=-lncurses
 
 OBJECT_FILES=$(SOURCES:$(SRC_PATH)/%.cpp=$(BUILD_PATH)/%.o)
 
-all: clean $(OBJECT_FILES)
+all: $(OBJECT_FILES)
+out:
+	@echo $(OBJECT_FILES)
 $(BUILD_PATH)/%.o:$(SRC_PATH)/%.cpp
-	@echo "Compiling file: $<"
+	@echo "Compiling file: $@"
 	@$(CC) $(CFLAGS) -c $< -o $@
 clean:
 	@find ./ -type f \( -name '*~' \) -delete
-	@rm -fr $(BUILD_PATH)/*
+	@find $(BUILD_PATH) -type f \( -name '*.o' \) -delete
 install:
-	sh setup-env.sh
+	sudo apt-get install libncurses5-dev libncursesw5-dev

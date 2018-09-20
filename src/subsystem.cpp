@@ -1,9 +1,10 @@
 #include "subsystem.hpp"
+#include <cstddef>
 
 using namespace RPR;
 
 Subsystem::Subsystem(){
-  default_command = nullptr;
+  default_command = NULL;
 }
 Subsystem::~Subsystem(){
 }

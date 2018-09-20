@@ -4,6 +4,7 @@
 #include "subsystem.hpp"
 #include "command.hpp"
 #include <vector>
+#include "operator_interface.hpp"
 
 namespace RPR {
   class Robot {
@@ -18,9 +19,8 @@ namespace RPR {
     bool running;
     std::vector<Subsystem*> subsystems;
     std::vector<Command*> commands;
-    /*
-      Operator_Interface oi;
-    */
+    Operator_Interface oi;
+    
   private:
     void check_subsystem_defaults(void);
   };
